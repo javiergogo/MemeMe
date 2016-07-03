@@ -70,11 +70,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     //Picking image from library
     @IBAction func pickImage(sender: AnyObject) {
-        pickingImage(.PhotoLibrary)
+        pickingImage(.Camera)
     }
     //Picking image from CAMERA
     @IBAction func pickImageAlbum(sender: AnyObject) {
-        pickingImage(.Camera)
+        pickingImage(.PhotoLibrary)
     }
     //User selected type of source (camera or album)
     func pickingImage(typeofSource: UIImagePickerControllerSourceType)
