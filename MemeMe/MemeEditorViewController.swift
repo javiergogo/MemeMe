@@ -19,6 +19,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topBar: UIToolbar!
     @IBOutlet weak var bottomBar: UIToolbar!
     
+    var meme: Meme!
+    
     //Hide status bar
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -46,6 +48,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         textTop.delegate = self
         textBottom.delegate = self
+        
+        if meme != nil
+        {
+            textTop.text = meme.textTop
+            textBottom.text = meme.textBottom
+            imagePickerView.image = meme.imageOriginal
+        }
         
         //Call function for format text in the textfield
         textTop = formatText(textTop!)
@@ -101,7 +110,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     //Gets subscribed when appered (WILLAPEAR) to any notification, call function keyboardwillhide
     func subscribeToKeyboardNotificationHiding ()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     //When keyboard will hide (it is a notification) ask if is bottom getting the focus if it is true makes 0 the origin of the app
     func keyboardWillHide(notification: NSNotification) {
@@ -120,7 +129,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     //Gets subscribed when appered
     func subscribeToKeyboardNotification ()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:"    , name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow(_:))    , name: UIKeyboardWillShowNotification, object: nil)
     }
     //When keyboard will show (it is a notification) ask if is bottom getting the focus if it is true calls getKeyboardheight
     //and moves the screen up (the size of the keyboard)
@@ -158,6 +167,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                     if success
                     {   //send memedimage to the function save in case of having success (in controller)
                         self.save(image)
+                        self.performSegueWithIdentifier("showSentMemes", sender: self)
                     }
                 }
             }
@@ -168,10 +178,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func save(memedImage: UIImage)
     {
         //Create the meme
-        var meme = Meme(textTop: textTop.text!, textBottom: textBottom.text!, imageOriginal: imagePickerView.image!, imageMemed: memedImage)
+        let meme = Meme(textTop: textTop.text!, textBottom: textBottom.text!, imageOriginal: imagePickerView.image!, imageMemed: memedImage)
         
         //Add it to the memes array in the Application Delegate
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        //The same
+        //(UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
     }
     
     // Create a UIImage that combines the Image View and the Textfields
