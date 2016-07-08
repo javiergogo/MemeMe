@@ -13,6 +13,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var sharingButton: UIBarButtonItem!
     @IBOutlet weak var textTop: UITextField!
     @IBOutlet weak var textBottom: UITextField!
     
@@ -40,11 +41,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
         unsubscribeFromKeyboardNotificationsHiding()
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sharingButton.enabled = false
         
         textTop.delegate = self
         textBottom.delegate = self
@@ -67,8 +69,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : -3.0
+            NSFontAttributeName : UIFont(name: "Impact", size: 40)!,
+            NSStrokeWidthAttributeName : -4.5
         ]
         textforFormating.defaultTextAttributes = memeTextAttributes
         textforFormating.textAlignment = NSTextAlignment.Center
@@ -76,7 +78,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return textforFormating
     }
 
-    
+    //#MARK: Image/camera management
     //Picking image from library
     @IBAction func pickImage(sender: AnyObject) {
         pickingImage(.Camera)
@@ -99,6 +101,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
             imagePickerView.image = image
+            sharingButton.enabled = true
         }
         view.bringSubviewToFront(textTop)
         view.bringSubviewToFront(textBottom)
@@ -106,7 +109,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    //Keyboard WILLHIDE
+    //#MARK: Keyboards functions
     //Gets subscribed when appered (WILLAPEAR) to any notification, call function keyboardwillhide
     func subscribeToKeyboardNotificationHiding ()
     {
@@ -151,29 +154,38 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return keyboardSize.CGRectValue().height
     }
     
-    
+    //When touch button return will stop editing text
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    //When touches outside of keyboard will stop editing text
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    //#MARK: Sharing methods
     //Sharing button
     @IBAction func sharingButton(sender: AnyObject)
     {
-        if imagePickerView.image != nil
-        {   //Beside of asign image and validate, call the function generateMemedImage, to generate a combinated image
-            if let image:UIImage = generateMemedImage()
-            {
-                //Send the memedImage in a controller to use in the next controller for message or sharing in general
-                let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-                self.presentViewController(controller, animated: true, completion: nil)
-                
-                controller.completionWithItemsHandler = { activity, success, items, error in
-                    if success
-                    {   //send memedimage to the function save in case of having success (in controller)
-                        self.save(image)
-                        self.performSegueWithIdentifier("showSentMemes", sender: self)
-                    }
+        //Beside of asign image and validate, call the function generateMemedImage, to generate a combinated image
+        if let image:UIImage = generateMemedImage()
+        {
+            //Send the memedImage in a controller to use in the next controller for message or sharing in general
+            let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            self.presentViewController(controller, animated: true, completion: nil)
+            
+            controller.completionWithItemsHandler = { activity, success, items, error in
+                if success
+                {   //send memedimage to the function save in case of having success (in controller)
+                    self.save(image)
+                    self.performSegueWithIdentifier("showSentMemes", sender: self)
                 }
             }
         }
     }
     
+    //#MARK: Adjusting image
     //Save memedimage, original image, both texts in a struct called Meme
     func save(memedImage: UIImage)
     {
@@ -206,21 +218,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return memedImage
     }
     
-    //When touch button return will stop editing text
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    //When touches outside of keyboard will stop editing text
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
+
     //Clear textfields and image
     @IBAction func clearButton(sender: AnyObject) {
+        
+        
+        let editViewCOntroller = self.storyboard?.instantiateViewControllerWithIdentifier("SentCollectionViewController") as! SentCollectionViewController
+        
+        //self.navigationController?.dismissViewControllerAnimated(false, completion: nil)
+        
+        self.navigationController?.pushViewController(editViewCOntroller, animated: true)
+        
+        
         textBottom.text = "BOTTOM"
         textTop.text = "TOP"
         imagePickerView.image = UIImage()
+        sharingButton.enabled = false
     }
     //Will clear text just the first time
     func textFieldDidBeginEditing(textField: UITextField) {

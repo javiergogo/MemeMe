@@ -22,7 +22,6 @@ class SentCollectionViewController: UICollectionViewController {
         //TODO: Implement flowLayout here.
         let space: CGFloat = 3.0
         let dimension = (view.frame.size.width - (2 * space)) / 3
-        //let dimensionHeight = (self.view.frame.size.height)
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
@@ -54,7 +53,7 @@ class SentCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as! SentCollectionViewCell
         
-        let meme = self.memes[indexPath.row]
+        let meme = memes[indexPath.row]
         
         cell.imageCollectionViewCell.image = meme.imageMemed
     
@@ -65,8 +64,8 @@ class SentCollectionViewController: UICollectionViewController {
         
         let detailedMemedController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         
-        detailedMemedController.meme = self.memes[indexPath.row]
-        self.navigationController?.pushViewController(detailedMemedController, animated: true)
+        detailedMemedController.meme = memes[indexPath.row]
+        navigationController?.pushViewController(detailedMemedController, animated: true)
         
         
     }
@@ -76,8 +75,8 @@ class SentCollectionViewController: UICollectionViewController {
         
         collectionView?.reloadData()
         
-        self.navigationController?.navigationBar.hidden = true
-        self.tabBarController?.tabBar.hidden = true
+        navigationController?.navigationBar.hidden = true
+        tabBarController?.tabBar.hidden = true
         
     }
     
@@ -85,8 +84,8 @@ class SentCollectionViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.navigationController?.navigationBar.hidden = false
-        self.tabBarController?.tabBar.hidden = false
+        navigationController?.navigationBar.hidden = false
+        tabBarController?.tabBar.hidden = false
     }
     
 

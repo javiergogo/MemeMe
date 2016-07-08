@@ -37,7 +37,6 @@ class SentTableViewController: UITableViewController {
         return memes.count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TableViewCell")!
         let meme = self.memes[indexPath.row]
@@ -47,6 +46,7 @@ class SentTableViewController: UITableViewController {
 
         return cell
     }
+    
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

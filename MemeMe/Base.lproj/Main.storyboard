@@ -45,7 +45,7 @@
         <!--Sent Memes-->
         <scene sceneID="SEO-XW-y9a">
             <objects>
-                <collectionViewController id="tGn-gi-bQ2" customClass="SentCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="SentCollectionViewController" id="tGn-gi-bQ2" customClass="SentCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EPa-yj-qt9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,7 +104,7 @@
         <!--Sent Memes-->
         <scene sceneID="MrF-xA-hOQ">
             <objects>
-                <tableViewController id="v54-jR-pYc" customClass="SentTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SentTableViewController" id="v54-jR-pYc" customClass="SentTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="p9a-wj-1Hn">
                         <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +142,7 @@
         <!--Table-->
         <scene sceneID="lwu-jy-h3i">
             <objects>
-                <navigationController id="HMl-6a-vfb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationTable" id="HMl-6a-vfb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Table" image="TableView" selectedImage="TableView" id="3TF-Sw-Jad"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fhV-hL-GXE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -207,34 +207,34 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJA-PD-Z3v">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="N9Y-E6-Fn6"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem systemItem="action" id="uCS-b1-tBx">
-                                        <connections>
-                                            <action selector="sharingButton:" destination="BYZ-38-t0r" id="Nn0-tK-8md"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qOZ-yu-GVy"/>
-                                    <barButtonItem systemItem="refresh" id="mDH-OA-3DX">
-                                        <connections>
-                                            <action selector="clearButton:" destination="BYZ-38-t0r" id="YCg-S0-WF0"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PY3-nT-yvX">
                                 <rect key="frame" x="15" y="80" width="345" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Nex-pF-ilS"/>
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJA-PD-Z3v">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="N9Y-E6-Fn6"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem enabled="NO" systemItem="action" id="uCS-b1-tBx">
+                                        <connections>
+                                            <action selector="sharingButton:" destination="BYZ-38-t0r" id="Nn0-tK-8md"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qOZ-yu-GVy"/>
+                                    <barButtonItem systemItem="cancel" id="mDH-OA-3DX">
+                                        <connections>
+                                            <action selector="clearButton:" destination="BYZ-38-t0r" id="YCg-S0-WF0"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -275,6 +275,7 @@
                         <outlet property="bottomBar" destination="7rf-kE-NDy" id="34F-Mb-Hzf"/>
                         <outlet property="cameraButton" destination="ffO-cQ-yae" id="ZHN-Wh-qKB"/>
                         <outlet property="imagePickerView" destination="MCr-y3-In8" id="Ysr-K6-E92"/>
+                        <outlet property="sharingButton" destination="uCS-b1-tBx" id="Qjy-Mr-RfJ"/>
                         <outlet property="textBottom" destination="YkV-2e-pUJ" id="a9u-Up-haX"/>
                         <outlet property="textTop" destination="PY3-nT-yvX" id="LNF-3k-csb"/>
                         <outlet property="topBar" destination="gJA-PD-Z3v" id="mHN-Aw-pDh"/>
@@ -334,6 +335,6 @@
         <image name="TableView" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dHK-Qj-qAn"/>
+        <segue reference="Rdr-hd-NKo"/>
     </inferredMetricsTieBreakers>
 </document>
