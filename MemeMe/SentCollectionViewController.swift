@@ -26,17 +26,7 @@ class SentCollectionViewController: UICollectionViewController {
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
-        
-        
-
-
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
    
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -86,6 +76,7 @@ class SentCollectionViewController: UICollectionViewController {
         
         navigationController?.navigationBar.hidden = false
         tabBarController?.tabBar.hidden = false
+        
     }
     
 

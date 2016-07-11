@@ -221,18 +221,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     //Clear textfields and image
     @IBAction func clearButton(sender: AnyObject) {
+              
+        dismissViewControllerAnimated(false, completion: nil)
         
-        
-        let editViewCOntroller = self.storyboard?.instantiateViewControllerWithIdentifier("SentCollectionViewController") as! SentCollectionViewController
-        
-        //self.navigationController?.dismissViewControllerAnimated(false, completion: nil)
-        
-        self.navigationController?.pushViewController(editViewCOntroller, animated: true)
-        
-        
-        textBottom.text = "BOTTOM"
-        textTop.text = "TOP"
-        imagePickerView.image = UIImage()
         sharingButton.enabled = false
     }
     //Will clear text just the first time

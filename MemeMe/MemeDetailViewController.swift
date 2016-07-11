@@ -22,23 +22,21 @@ class MemeDetailViewController: UIViewController {
         self.navigationController?.navigationBar.hidden = false
         
         
-        let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "editMethod")
+        let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: #selector(MemeDetailViewController.editMethod))
         navigationItem.rightBarButtonItem = editButton
         
         self.tabBarController?.tabBar.hidden = true
     }
-    
 
     
     func editMethod()
     {
         
         let editViewCOntroller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
-        
         editViewCOntroller.meme = meme
 
-        self.navigationController?.pushViewController(editViewCOntroller, animated: true)
-        
+        //self.navigationController?.pushViewController(editViewCOntroller, animated: true)
+        presentViewController(editViewCOntroller, animated: true, completion: nil)
  
         
     }

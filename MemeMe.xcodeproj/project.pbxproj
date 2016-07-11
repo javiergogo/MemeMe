@@ -47,6 +47,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		651A59561D32FB6400623777 /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				65EA46321D2C5A9200EB7CBE /* SentTableViewController.swift */,
+				65EA462E1D2C59EC00EB7CBE /* SentCollectionViewController.swift */,
+				65EA46301D2C5A1000EB7CBE /* SentCollectionViewCell.swift */,
+			);
+			name = Tables;
+			sourceTree = "<group>";
+		};
 		656AA4721D258DE700608C8E = {
 			isa = PBXGroup;
 			children = (
@@ -69,11 +79,9 @@
 				656AA47E1D258DE700608C8E /* AppDelegate.swift */,
 				656AA4961D2871A200608C8E /* Meme.swift */,
 				656AA4821D258DE700608C8E /* Main.storyboard */,
-				65EA46321D2C5A9200EB7CBE /* SentTableViewController.swift */,
-				65EA462E1D2C59EC00EB7CBE /* SentCollectionViewController.swift */,
-				65EA46301D2C5A1000EB7CBE /* SentCollectionViewCell.swift */,
 				656AA4801D258DE700608C8E /* MemeEditorViewController.swift */,
 				65EA462C1D2C576B00EB7CBE /* MemeDetailViewController.swift */,
+				651A59561D32FB6400623777 /* Tables */,
 				656AA4851D258DE700608C8E /* Assets.xcassets */,
 				656AA4871D258DE700608C8E /* LaunchScreen.storyboard */,
 				656AA48A1D258DE700608C8E /* Info.plist */,
