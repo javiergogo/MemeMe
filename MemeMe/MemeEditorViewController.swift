@@ -34,6 +34,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         //Susbscribe to any movement (notification)
         subscribeToKeyboardNotification()
         subscribeToKeyboardNotificationHiding()
+        
+        topBar.hidden = false
+        bottomBar.hidden = false
     }
     
     override func viewWillDisappear(animated: Bool)
@@ -46,8 +49,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sharingButton.enabled = false
-        
         textTop.delegate = self
         textBottom.delegate = self
         
@@ -56,6 +57,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             textTop.text = meme.textTop
             textBottom.text = meme.textBottom
             imagePickerView.image = meme.imageOriginal
+            sharingButton.enabled = true
         }
         
         //Call function for format text in the textfield
@@ -179,7 +181,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 if success
                 {   //send memedimage to the function save in case of having success (in controller)
                     self.save(image)
-                    self.performSegueWithIdentifier("showSentMemes", sender: self)
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
         }
@@ -217,15 +219,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         return memedImage
     }
-    
 
+    
     //Clear textfields and image
     @IBAction func clearButton(sender: AnyObject) {
               
-        dismissViewControllerAnimated(false, completion: nil)
-        
+        dismissViewControllerAnimated(true, completion: nil)
         sharingButton.enabled = false
     }
+    
     //Will clear text just the first time
     func textFieldDidBeginEditing(textField: UITextField) {
         if textTop.isFirstResponder() && textTop.text == "TOP"

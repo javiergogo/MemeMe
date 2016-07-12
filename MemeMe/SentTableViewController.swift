@@ -59,8 +59,8 @@ class SentTableViewController: UITableViewController {
         
         tableView.reloadData()
         
-        self.navigationController?.navigationBar.hidden = true
-        self.tabBarController?.tabBar.hidden = true
+       // self.navigationController?.navigationBar.hidden = true
+       // self.tabBarController?.tabBar.hidden = true
         
     }
     
@@ -68,8 +68,9 @@ class SentTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.navigationController?.navigationBar.hidden = false
-        self.tabBarController?.tabBar.hidden = false
+        tableView.reloadData()
+//        self.navigationController?.navigationBar.hidden = false
+//        self.tabBarController?.tabBar.hidden = false
     }
 
  

@@ -65,8 +65,8 @@ class SentCollectionViewController: UICollectionViewController {
         
         collectionView?.reloadData()
         
-        navigationController?.navigationBar.hidden = true
-        tabBarController?.tabBar.hidden = true
+//        navigationController?.navigationBar.hidden = true
+//        tabBarController?.tabBar.hidden = true
         
     }
     
@@ -74,8 +74,9 @@ class SentCollectionViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.navigationBar.hidden = false
-        tabBarController?.tabBar.hidden = false
+        collectionView?.reloadData()
+//        navigationController?.navigationBar.hidden = false
+//        tabBarController?.tabBar.hidden = false
         
     }
     

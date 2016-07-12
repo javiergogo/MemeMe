@@ -89,7 +89,7 @@
                     <navigationItem key="navigationItem" title="Sent Memes" id="9bs-Sb-QXM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9BW-i4-oFs">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="Rdr-hd-NKo"/>
+                                <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="Rdr-hd-NKo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -336,6 +336,6 @@
         <image name="TableView" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dHK-Qj-qAn"/>
+        <segue reference="Rdr-hd-NKo"/>
     </inferredMetricsTieBreakers>
 </document>
